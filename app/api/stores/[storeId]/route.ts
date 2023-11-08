@@ -12,7 +12,7 @@ export async function PATCH(
     const { name } = body;
 
     if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
-    if (!name) return new NextResponse('Unauthenticated', { status: 400 });
+    if (!name) return new NextResponse('name is required', { status: 400 });
     if (!params.storeId)
       return new NextResponse('Store id is required', { status: 400 });
     const store = await prismadb.store.updateMany({
