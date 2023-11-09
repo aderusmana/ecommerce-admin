@@ -35,7 +35,7 @@ export async function POST(
     });
 
     if (!storeByUserId) {
-      return new NextResponse('Unauthorized', { status: 403 });
+      return new NextResponse('Unauthorized', { status: 405 });
     }
 
     const billboard = await prismadb.billboard.create({

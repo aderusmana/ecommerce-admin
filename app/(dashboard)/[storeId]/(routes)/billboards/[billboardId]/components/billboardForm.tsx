@@ -67,9 +67,10 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
         await axios.post(`/api/${params.storeId}/billboards`, data);
       }
       router.refresh();
+      router.push(`/${params.storeId}/billboards`);
       toast.success(toastMessage);
-    } catch (error) {
-      toast.error('Something went wrong');
+    } catch (error: any) {
+      toast.error('Something went wrong.');
     } finally {
       setLoading(false);
     }
@@ -79,10 +80,10 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
     try {
       setLoading(true);
       await axios.delete(
-        `/api/{params.storeId}/billboards/${params.billboardId}`,
+        `/api/${params.storeId}/billboards/${params.billboardId}`,
       );
       router.refresh();
-      router.push('/');
+      router.push(`/${params.storeId}/billboards/`);
       toast.success('Billboard deleted successfully');
     } catch (error) {
       toast.error('Make sure you delete all categories using this billboards');
@@ -116,37 +117,37 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className={'space-y-8 w-full'}
+          className="space-y-8 w-full"
         >
           <FormField
-            name={'imageUrl'}
             control={form.control}
+            name="imageUrl"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Billboard Image</FormLabel>
+                <FormLabel>Background image</FormLabel>
                 <FormControl>
                   <ImageUploads
                     value={field.value ? [field.value] : []}
+                    disabled={loading}
                     onChange={(url) => field.onChange(url)}
                     onRemove={() => field.onChange('')}
-                    disabled={loading}
                   />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <div className={' grid grid-cols-3 gap-8'}>
+          <div className="md:grid md:grid-cols-3 gap-8">
             <FormField
-              name={'label'}
               control={form.control}
+              name="label"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Billboard Name</FormLabel>
+                  <FormLabel>Label</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder={'Billboard Name'}
+                      placeholder="Billboard label"
                       {...field}
                     />
                   </FormControl>
@@ -155,12 +156,11 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
               )}
             />
           </div>
-          <Button disabled={loading} type={'submit'} className={'ml-auto'}>
+          <Button disabled={loading} className="ml-auto" type="submit">
             {action}
           </Button>
         </form>
       </Form>
-      <Separator />
     </>
   );
 };
