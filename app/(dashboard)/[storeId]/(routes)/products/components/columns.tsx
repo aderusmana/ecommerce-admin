@@ -3,7 +3,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { Button } from '@/components/ui/button';
 import { ArrowUpDown } from 'lucide-react';
-import CellAction from '@/app/(dashboard)/[storeId]/(routes)/billboards/components/cellAction';
+import CellAction from '@/app/(dashboard)/[storeId]/(routes)/products/components/cellAction';
 
 export type ProductColumn = {
   id: string;
@@ -46,34 +46,7 @@ export const columns: ColumnDef<ProductColumn>[] = [
       );
     },
   },
-  {
-    accessorKey: 'isFeatured',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          IsFeatured
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: 'isArchived',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          isArchived
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
+  
   {
     accessorKey: 'category',
     header: ({ column }) => {
@@ -113,6 +86,15 @@ export const columns: ColumnDef<ProductColumn>[] = [
         />
       );
     }
+  },
+  {
+    accessorKey: 'isFeatured',
+    header: "Featured"
+  },
+  {
+    accessorKey: 'isArchived',
+    header: "Archived"
+
   },
   
   {

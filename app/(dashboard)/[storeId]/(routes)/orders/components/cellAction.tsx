@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ProductColumn } from '@/app/(dashboard)/[storeId]/(routes)/products/components/columns';
+import { BillboardColumn } from '@/app/(dashboard)/[storeId]/(routes)/billboards/components/columns';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +17,7 @@ import axios from 'axios';
 import { AlertModal } from '@/components/modals/alert-modal';
 
 interface CellActionsProps {
-  data: ProductColumn;
+  data: BillboardColumn;
 }
 const CellAction: React.FC<CellActionsProps> = ({ data }) => {
   const router = useRouter();
@@ -32,11 +32,11 @@ const CellAction: React.FC<CellActionsProps> = ({ data }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/products/${data.id}`);
+      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
       router.refresh();
       toast.success('Billboard deleted successfully');
     } catch (error) {
-      toast.error('Make sure you delete all categories using this products');
+      toast.error('Make sure you delete all categories using this billboards');
     } finally {
       setLoading(false);
       setOpen(false);
@@ -65,7 +65,7 @@ const CellAction: React.FC<CellActionsProps> = ({ data }) => {
             </DropdownMenuItem>{' '}
             <DropdownMenuItem
               onClick={() =>
-                router.push(`/${params.storeId}/products/${data.id}`)
+                router.push(`/${params.storeId}/billboards/${data.id}`)
               }
             >
               <EditIcon className={'mr-2 w-4 h-4'} /> Update

@@ -1,6 +1,6 @@
 import React from 'react';
 import prismadb from '@/lib/prismadb';
-import ColorForm from './components/sizeForm';
+import ColorForm from './components/colorForm';
 
 const ColorPage = async ({
   params,
