@@ -3,28 +3,47 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { Button } from '@/components/ui/button';
 import { ArrowUpDown } from 'lucide-react';
-import CellAction from '@/app/(dashboard)/[storeId]/(routes)/billboards/components/cellAction';
 
-export type BillboardColumn = {
+export type OrderColumn = {
   id: string;
-  label: string;
+  phone: string;
+  address: string;
+  isPaid : boolean;
+  totalPrice: string;
+  products: string;
   createdAt: string;
 };
 
-export const columns: ColumnDef<BillboardColumn>[] = [
+export const columns: ColumnDef<OrderColumn>[] = [
   {
-    accessorKey: 'label',
+    accessorKey: 'products',
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Billboard Label
+          Products
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
+  },
+  {
+    accessorKey: 'phone',
+    header: "Phone"
+  },
+  {
+    accessorKey: 'address',
+    header: "Address"
+  },
+  {
+    accessorKey: 'totalPrice',
+    header: "Total Price"
+  },
+  {
+    accessorKey: 'isPaid',
+    header: "Paid"
   },
   {
     accessorKey: 'createdAt',
@@ -39,9 +58,5 @@ export const columns: ColumnDef<BillboardColumn>[] = [
         </Button>
       );
     },
-  },
-  {
-    id: 'action',
-    cell: ({ row }) => <CellAction data={row.original} />,
   },
 ];

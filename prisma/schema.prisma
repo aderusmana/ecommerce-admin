@@ -131,7 +131,7 @@ model OrderItem {
   orderId   String
   order     Order   @relation("OrderToOrderItem", fields: [orderId], references: [id])
   productId String
-  Product   Product @relation("OrderItemToProduct", fields: [productId], references: [id])
+  product   Product @relation("OrderItemToProduct", fields: [productId], references: [id])
 
   @@index([orderId])
   @@index([productId])
