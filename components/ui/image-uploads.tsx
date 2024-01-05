@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ImagePlus, TrashIcon } from 'lucide-react';
 import Image from 'next/image';
@@ -17,21 +17,13 @@ const ImageUploads: React.FC<ImageUploadsProps> = ({
   onRemove,
   value,
 }) => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    return () => {
-      setIsMounted(true);
-    };
-  }, []);
+ 
 
   const onUploads = (result: any) => {
     onChange(result.info.secure_url);
   };
 
-  if (!isMounted) {
-    return null;
-  }
+ 
   return (
     <div>
       <div className={'mb-4 flex items-center gap-4'}>
